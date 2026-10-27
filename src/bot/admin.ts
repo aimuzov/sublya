@@ -12,6 +12,7 @@ import type { Api } from 'grammy'
 
 import type { Settings } from '#bot/config.ts'
 import type { Db } from '#bot/db.ts'
+import { captureException } from '#bot/sentry.ts'
 import { isTelegramError } from '#bot/support.ts'
 import * as texts from '#bot/texts.ts'
 
@@ -351,6 +352,7 @@ export function makeHandler(db: Db, settings: Settings, openrouter: OpenRouter, 
 			return json(res, 200, { limit: total, notified })
 		} catch (e) {
 			console.error('admin request failed', e)
+			captureException(e)
 
 			if (!res.headersSent) json(res, 500, { error: 'internal' })
 		}

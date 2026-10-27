@@ -128,6 +128,8 @@ SUBLYA_FFMPEG=/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg demo/make-demo.sh name vi
 | `DATA_DIR`                             | `data`                          | база SQLite и файлы задач, удаляются через сутки                                                              |
 | `SUBLYA_FFMPEG`, `SUBLYA_FFPROBE`      | из `PATH`                       | ffmpeg должен быть с libass                                                                                   |
 | `SUBLYA_FONTS_DIR`                     |                                 | где libass ищет Montserrat ExtraBold, по умолчанию `src/bot/fonts`                                            |
+| `SENTRY_DSN`                           | пусто                           | DSN Sentry для ошибок бота; пусто -- Sentry выключен                                                          |
+| `PUBLIC_SENTRY_DSN`                    | пусто                           | DSN Sentry, который вшивается в сайт при сборке, для ошибок браузера                                          |
 
 Опечатка в числе или в `ADMIN_IDS` останавливает запуск, а не превращается в пустую настройку.
 

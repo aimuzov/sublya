@@ -54,6 +54,8 @@ const metrikaId = 113179171
 		<slot />
 		<script>
 			import { glow } from '#frontend/lib/glow.ts'
+			import { sentry } from '#frontend/lib/sentry.ts'
+			sentry()
 			glow()
 		</script>
 	</body>

@@ -130,6 +130,8 @@ Everything comes from the environment; [`.env.example`](.env.example) lists it.
 | `DATA_DIR`                             | `data`                          | SQLite database and job files, removed after 24 hours                                                     |
 | `SUBLYA_FFMPEG`, `SUBLYA_FFPROBE`      | from `PATH`                     | ffmpeg must have libass                                                                                   |
 | `SUBLYA_FONTS_DIR`                     |                                 | where libass looks for Montserrat ExtraBold, `src/bot/fonts` by default                                   |
+| `SENTRY_DSN`                           | empty                           | Sentry DSN for the bot's errors; empty keeps Sentry off                                                   |
+| `PUBLIC_SENTRY_DSN`                    | empty                           | Sentry DSN baked into the site at build time for browser errors                                           |
 
 A typo in a number or in `ADMIN_IDS` stops the start instead of turning into an empty setting.
 

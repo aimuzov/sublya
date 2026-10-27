@@ -15,6 +15,7 @@ import { fromJson, toJson, type Transcript } from '#bot/core/models.ts'
 import { render } from '#bot/core/render.ts'
 import { NoSpeech, SttError, transcribe } from '#bot/core/transcribe.ts'
 import { rootId, type Db, type Job } from '#bot/db.ts'
+import { captureException } from '#bot/sentry.ts'
 import { isBadRequest, quiet } from '#bot/support.ts'
 import * as texts from '#bot/texts.ts'
 import { isStyle } from '#shared/subtitles.ts'
@@ -111,6 +112,7 @@ export class Worker {
 				await this.fail(job, texts.RENDER_FAILED, `${e.message}\n${e.stderr}`, true)
 			else {
 				console.error(`job ${job.id} failed`, e)
+				captureException(e, { extra: { job: job.id } })
 				await this.fail(job, texts.FAILED, String(e instanceof Error ? (e.stack ?? e) : e), true)
 			}
 		}
