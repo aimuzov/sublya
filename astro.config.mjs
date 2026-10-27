@@ -25,7 +25,8 @@ export default defineConfig({
 			directives: [
 				"default-src 'self'",
 				"img-src 'self' data:",
-				"connect-src 'self'",
+				// ошибки браузера уходят в Sentry
+				"connect-src 'self' https://*.ingest.de.sentry.io",
 				"object-src 'none'",
 				"base-uri 'self'",
 				"form-action 'self'",
