@@ -8,6 +8,7 @@
 import * as Sentry from '@sentry/node'
 
 import pkg from '#package.json' with { type: 'json' }
+import { dataCollection } from '#shared/sentry.ts'
 
 if (process.env.SENTRY_DSN) {
 	Sentry.init({
@@ -15,6 +16,9 @@ if (process.env.SENTRY_DSN) {
 		environment: 'production',
 		release: `sublya@${pkg.version}`,
 		initialScope: { tags: { component: 'bot' } },
+		dataCollection,
+		// без сессий: иначе каждый запрос к админке шлёт их в Sentry, даже без ошибок
+		integrations: [Sentry.httpIntegration({ sessions: false })],
 	})
 }
 

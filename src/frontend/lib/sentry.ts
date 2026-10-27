@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/browser'
 
 // Именованный импорт: в бандл попадает только версия, а не весь package.json.
 import { version } from '#package.json'
+import { dataCollection } from '#shared/sentry.ts'
 
 /**
  * Отправляет ошибки браузера в Sentry, в общий с ботом проект, с тегом `component: site`.
@@ -19,6 +20,7 @@ export function sentry() {
 		environment: 'production',
 		release: `sublya@${version}`,
 		initialScope: { tags: { component: 'site' } },
+		dataCollection,
 		// без сессий: иначе каждый заход на страницу шлёт запрос в Sentry, даже без ошибок
 		integrations: (defaults) => defaults.filter((integration) => integration.name !== 'BrowserSession'),
 	})
