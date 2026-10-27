@@ -1,3 +1,5 @@
+import '#bot/sentry.ts'
+
 import { join } from 'node:path'
 import { run } from '@grammyjs/runner'
 import { Bot } from 'grammy'
@@ -6,6 +8,7 @@ import { serve } from '#bot/admin.ts'
 import { fromEnv } from '#bot/config.ts'
 import { Db } from '#bot/db.ts'
 import { handlers } from '#bot/handlers.ts'
+import { captureException, flush } from '#bot/sentry.ts'
 import { isTelegramError, mirrorIncoming, mirrorOutgoing, Support } from '#bot/support.ts'
 import * as texts from '#bot/texts.ts'
 import { cleanupLoop, Worker } from '#bot/worker.ts'
@@ -30,7 +33,11 @@ if (support.enabled) {
 }
 
 bot.use(handlers({ db, worker, settings, support }))
-bot.catch(({ error, ctx }) => console.error(`update ${ctx.update.update_id} failed`, error))
+
+bot.catch(({ error, ctx }) => {
+	console.error(`update ${ctx.update.update_id} failed`, error)
+	captureException(error, { extra: { update: ctx.update.update_id } })
+})
 
 await bot.api.setMyCommands(COMMANDS)
 let panel = null
@@ -53,8 +60,11 @@ if (settings.adminUrl) {
 const stop = new AbortController()
 
 void [worker.run(stop.signal), cleanupLoop(settings, stop.signal)].map((task) =>
-	task.catch((e) => {
+	task.catch(async (e) => {
 		console.error('background task died', e)
+		captureException(e)
+		// событие уходит асинхронно, без ожидания `exit` его бы оборвал
+		await flush(2000)
 		process.exit(1)
 	}),
 )
