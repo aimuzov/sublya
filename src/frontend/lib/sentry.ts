@@ -5,7 +5,7 @@ import { version } from '#package.json'
 
 /**
  * Отправляет ошибки браузера в Sentry, в общий с ботом проект, с тегом `component: site`.
- * Только ошибки, без трейсинга и Replay.
+ * Только ошибки, без трейсинга, Replay и сессий.
  *
  * DSN вшивается при сборке из `PUBLIC_SENTRY_DSN`. Без него (локально, в CI) SDK не включается.
  */
@@ -19,5 +19,7 @@ export function sentry() {
 		environment: 'production',
 		release: `sublya@${version}`,
 		initialScope: { tags: { component: 'site' } },
+		// без сессий: иначе каждый заход на страницу шлёт запрос в Sentry, даже без ошибок
+		integrations: (defaults) => defaults.filter((integration) => integration.name !== 'BrowserSession'),
 	})
 }
