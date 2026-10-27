@@ -17,8 +17,11 @@ if (process.env.SENTRY_DSN) {
 		release: `sublya@${pkg.version}`,
 		initialScope: { tags: { component: 'bot' } },
 		dataCollection,
-		// без сессий: иначе каждый запрос к админке шлёт их в Sentry, даже без ошибок
-		integrations: [Sentry.httpIntegration({ sessions: false })],
+		// без сессий процесса и запросов к админке: они уходят в Sentry и без ошибок
+		integrations: (defaults) => [
+			...defaults.filter(({ name }) => name !== 'ProcessSession' && name !== 'Http'),
+			Sentry.httpIntegration({ sessions: false }),
+		],
 	})
 }
 
