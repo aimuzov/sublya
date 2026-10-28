@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.5](https://github.com/aimuzov/sublya/compare/v1.3.4...v1.3.5) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deps:** move to infra-site-kit 5.9.1 with the strict Sentry events ([28d7e32](https://github.com/aimuzov/sublya/commit/28d7e326fccdcdabb3302c429c44e6a755e37c25))
+* **deps:** move to infra-site-kit 5.9.1 with the strict Sentry events ([9d26ff8](https://github.com/aimuzov/sublya/commit/9d26ff84e0efa2b67a82322f26566a9049bd6e23))
+
 ## [1.3.4](https://github.com/aimuzov/sublya/compare/v1.3.3...v1.3.4) (2026-10-27)
 
 
