@@ -1,3 +1,5 @@
+import { pageTitle as sharedPageTitle } from '@aimuzov/infra-site-kit/title.js'
+
 import { site } from '#frontend/data/site.ts'
 
 /**
@@ -5,5 +7,5 @@ import { site } from '#frontend/data/site.ts'
  * У главной страницы -- просто заголовок сайта.
  */
 export function pageTitle(title?: string) {
-	return title ? `${title} — ${site.name}` : site.title
+	return sharedPageTitle(title, { siteName: site.name, homeTitle: site.title })
 }
