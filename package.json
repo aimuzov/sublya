@@ -24,12 +24,12 @@
 		"lint:fix": "oxlint --fix"
 	},
 	"dependencies": {
+		"@aimuzov/infra-site-kit": "github:aimuzov/infra-site-kit#661bf5760d9fda3c0ba6bd35ddb4cbb4537aa929",
 		"@grammyjs/runner": "2.0.3",
 		"@sentry/node": "11.9.0",
 		"grammy": "1.46.0"
 	},
 	"devDependencies": {
-		"@aimuzov/infra-site-kit": "github:aimuzov/infra-site-kit#661bf5760d9fda3c0ba6bd35ddb4cbb4537aa929",
 		"@astrojs/check": "0.9.10",
 		"@astrojs/sitemap": "3.7.4",
 		"@astrojs/svelte": "9.0.1",
