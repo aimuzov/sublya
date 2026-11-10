@@ -73,7 +73,7 @@ jobs:
       image-suffix: '-site'
       dockerfile: deploy/frontend.Dockerfile
     secrets:
-      build-env: ${{ secrets.SITE_BUILD_ENV }}
+      build-env: ${{ format('PUBLIC_SENTRY_DSN={0}', vars.PUBLIC_SENTRY_DSN) }}
 
   build-bot:
     needs: [release, check]
