@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/aimuzov/sublya/compare/v1.3.5...v1.4.0) (2026-11-12)
+
+
+### Features
+
+* build release images in Actions ([d12e9d7](https://github.com/aimuzov/sublya/commit/d12e9d7619fd84807277a0e9bc206597555e0641))
+
+
+### Bug Fixes
+
+* include shared typography in the bot runtime ([#56](https://github.com/aimuzov/sublya/issues/56)) ([005279c](https://github.com/aimuzov/sublya/commit/005279cd844805f8de34aff687f63d62a760a555))
+* read the public Sentry DSN from Actions variables ([7dbc595](https://github.com/aimuzov/sublya/commit/7dbc5952d8634b0e2d889c53092ce77f5c512aa0))
+
 ## [1.3.5](https://github.com/aimuzov/sublya/compare/v1.3.4...v1.3.5) (2026-10-28)
 
 
