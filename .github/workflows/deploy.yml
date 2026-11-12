@@ -23,6 +23,8 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
+  id-token: write
 
 jobs:
   release:
@@ -63,7 +65,9 @@ jobs:
   build-site:
     needs: [release, check]
     if: >-
-      !cancelled() && (inputs.build_only || (vars.DEPLOY_ENABLED == 'true' && vars.DEPLOY_FROM_GHCR == 'true' && (needs.release.outputs.tag || inputs.tag) != '' && (github.event_name == 'workflow_dispatch' || needs.check.result == 'success')))
+      !cancelled() && (inputs.build_only || (vars.DEPLOY_ENABLED == 'true' && vars.DEPLOY_FROM_GHCR == 'true' &&
+      (needs.release.outputs.tag || inputs.tag) != '' && (github.event_name == 'workflow_dispatch' || needs.check.result
+      == 'success')))
     permissions:
       contents: read
       packages: write
@@ -78,7 +82,9 @@ jobs:
   build-bot:
     needs: [release, check]
     if: >-
-      !cancelled() && (inputs.build_only || (vars.DEPLOY_ENABLED == 'true' && vars.DEPLOY_FROM_GHCR == 'true' && (needs.release.outputs.tag || inputs.tag) != '' && (github.event_name == 'workflow_dispatch' || needs.check.result == 'success')))
+      !cancelled() && (inputs.build_only || (vars.DEPLOY_ENABLED == 'true' && vars.DEPLOY_FROM_GHCR == 'true' &&
+      (needs.release.outputs.tag || inputs.tag) != '' && (github.event_name == 'workflow_dispatch' || needs.check.result
+      == 'success')))
     permissions:
       contents: read
       packages: write
