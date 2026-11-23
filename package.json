@@ -24,7 +24,7 @@
 		"lint:fix": "oxlint --fix"
 	},
 	"dependencies": {
-		"@aimuzov/infra-site-kit": "github:aimuzov/infra-site-kit#661bf5760d9fda3c0ba6bd35ddb4cbb4537aa929",
+		"@aimuzov/infra-site-kit": "github:aimuzov/infra-site-kit#b7bcdbe8ade8e06a7bea4f55ff4f29796388241e",
 		"@grammyjs/runner": "2.0.3",
 		"@sentry/node": "11.9.0",
 		"grammy": "1.46.0"
